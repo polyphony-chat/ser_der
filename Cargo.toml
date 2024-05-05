@@ -1,7 +1,10 @@
 [package]
 name = "serder"
+description = "Newtypes for the der crate to allow for serde de-/serialization"
 version = "0.0.0"
 edition = "2021"
+authors = ["bitfl0wer"]
+license = "MPL-2.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
