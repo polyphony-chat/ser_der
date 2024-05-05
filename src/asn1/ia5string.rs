@@ -9,6 +9,7 @@ use std::ops::{Deref, DerefMut};
 use serde::de::Visitor;
 use serde::{Deserialize, Serialize};
 
+#[derive(Debug, PartialEq, Clone, Eq, PartialOrd, Ord)]
 pub struct Ia5String(der::asn1::Ia5String);
 
 impl Deref for Ia5String {
@@ -73,5 +74,27 @@ impl Serialize for Ia5String {
         S: serde::Serializer,
     {
         serializer.serialize_str(self.0.to_string().as_str())
+    }
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+    use serde_test::{assert_de_tokens, assert_tokens, Token};
+
+    #[test]
+    fn ia5string_ser() {
+        let ia5string = Ia5String(der::asn1::Ia5String::new("test").unwrap());
+        assert_tokens(&ia5string, &[Token::Str("test")]);
+        let ia5string = Ia5String(der::asn1::Ia5String::new(&64u64.to_string()).unwrap());
+        assert_tokens(&ia5string, &[Token::Str("64")]);
+    }
+
+    #[test]
+    fn ia5string_de() {
+        let ia5string = Ia5String(der::asn1::Ia5String::new("test").unwrap());
+        assert_de_tokens(&ia5string, &[Token::Str("test")]);
+        let ia5string = Ia5String(der::asn1::Ia5String::new(64u64.to_string().as_str()).unwrap());
+        assert_de_tokens(&ia5string, &[Token::Str("64")]);
     }
 }
