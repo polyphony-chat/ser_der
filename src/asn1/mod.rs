@@ -4,5 +4,5 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-#[cfg(feature = "alloc")]
-pub mod asn1;
+mod ia5string;
+pub use ia5string::*;
