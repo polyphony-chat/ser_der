@@ -6,6 +6,7 @@
 
 use std::ops::{Deref, DerefMut};
 
+use der::Decode;
 use serde::de::Visitor;
 
 pub struct Ia5String(der::asn1::Ia5String);
@@ -45,173 +46,82 @@ impl<'de> Visitor<'de> for Ia5StringVisitor {
         formatter.write_str("A concatenation of characters from the IA5 character set")
     }
 
-    fn visit_i8<E>(self, v: i8) -> Result<Self::Value, E>
-    where
-        E: serde::de::Error,
-    {
-        self.visit_i64(v as i64)
-    }
-
-    fn visit_i16<E>(self, v: i16) -> Result<Self::Value, E>
-    where
-        E: serde::de::Error,
-    {
-        self.visit_i64(v as i64)
-    }
-
-    fn visit_i32<E>(self, v: i32) -> Result<Self::Value, E>
-    where
-        E: serde::de::Error,
-    {
-        self.visit_i64(v as i64)
-    }
-
     fn visit_i64<E>(self, v: i64) -> Result<Self::Value, E>
     where
         E: serde::de::Error,
     {
-        Err(serde::de::Error::invalid_type(
-            serde::de::Unexpected::Signed(v),
-            &self,
-        ))
+        Ok(Ia5String(match der::asn1::Ia5String::new(&v.to_string()) {
+            Ok(val) => val,
+            Err(e) => return Err(E::custom(e)),
+        }))
     }
 
     fn visit_i128<E>(self, v: i128) -> Result<Self::Value, E>
     where
         E: serde::de::Error,
     {
-        let mut buf = [0u8; 58];
-        let mut writer = format::Buf::new(&mut buf);
-        std::fmt::Write::write_fmt(&mut writer, format_args!("integer `{}` as i128", v)).unwrap();
-        Err(serde::de::Error::invalid_type(
-            serde::de::Unexpected::Other(writer.as_str()),
-            &self,
-        ))
-    }
-
-    fn visit_u8<E>(self, v: u8) -> Result<Self::Value, E>
-    where
-        E: serde::de::Error,
-    {
-        self.visit_u64(v as u64)
-    }
-
-    fn visit_u16<E>(self, v: u16) -> Result<Self::Value, E>
-    where
-        E: serde::de::Error,
-    {
-        self.visit_u64(v as u64)
-    }
-
-    fn visit_u32<E>(self, v: u32) -> Result<Self::Value, E>
-    where
-        E: serde::de::Error,
-    {
-        self.visit_u64(v as u64)
+        Ok(Ia5String(match der::asn1::Ia5String::new(&v.to_string()) {
+            Ok(val) => val,
+            Err(e) => return Err(E::custom(e)),
+        }))
     }
 
     fn visit_u64<E>(self, v: u64) -> Result<Self::Value, E>
     where
         E: serde::de::Error,
     {
-        Err(serde::de::Error::invalid_type(
-            serde::de::Unexpected::Unsigned(v),
-            &self,
-        ))
+        Ok(Ia5String(match der::asn1::Ia5String::new(&v.to_string()) {
+            Ok(val) => val,
+            Err(e) => return Err(E::custom(e)),
+        }))
     }
 
     fn visit_u128<E>(self, v: u128) -> Result<Self::Value, E>
     where
         E: serde::de::Error,
     {
-        let mut buf = [0u8; 57];
-        let mut writer = format::Buf::new(&mut buf);
-        std::fmt::Write::write_fmt(&mut writer, format_args!("integer `{}` as u128", v)).unwrap();
-        Err(serde::de::Error::invalid_type(
-            serde::de::Unexpected::Other(writer.as_str()),
-            &self,
-        ))
-    }
-
-    fn visit_f32<E>(self, v: f32) -> Result<Self::Value, E>
-    where
-        E: serde::de::Error,
-    {
-        self.visit_f64(v as f64)
+        Ok(Ia5String(match der::asn1::Ia5String::new(&v.to_string()) {
+            Ok(val) => val,
+            Err(e) => return Err(E::custom(e)),
+        }))
     }
 
     fn visit_f64<E>(self, v: f64) -> Result<Self::Value, E>
     where
         E: serde::de::Error,
     {
-        Err(serde::de::Error::invalid_type(
-            serde::de::Unexpected::Float(v),
-            &self,
-        ))
-    }
-
-    fn visit_char<E>(self, v: char) -> Result<Self::Value, E>
-    where
-        E: serde::de::Error,
-    {
-        self.visit_str(v.encode_utf8(&mut [0u8; 4]))
+        Ok(Ia5String(match der::asn1::Ia5String::new(&v.to_string()) {
+            Ok(val) => val,
+            Err(e) => return Err(E::custom(e)),
+        }))
     }
 
     fn visit_str<E>(self, v: &str) -> Result<Self::Value, E>
     where
         E: serde::de::Error,
     {
-        Err(serde::de::Error::invalid_type(
-            serde::de::Unexpected::Str(v),
-            &self,
-        ))
-    }
-
-    fn visit_borrowed_str<E>(self, v: &'de str) -> Result<Self::Value, E>
-    where
-        E: serde::de::Error,
-    {
-        self.visit_str(v)
-    }
-
-    fn visit_string<E>(self, v: String) -> Result<Self::Value, E>
-    where
-        E: serde::de::Error,
-    {
-        self.visit_str(&v)
+        Ok(Ia5String(match der::asn1::Ia5String::new(&v.to_string()) {
+            Ok(val) => val,
+            Err(e) => return Err(E::custom(e)),
+        }))
     }
 
     fn visit_bytes<E>(self, v: &[u8]) -> Result<Self::Value, E>
     where
         E: serde::de::Error,
     {
-        Err(serde::de::Error::invalid_type(
-            serde::de::Unexpected::Bytes(v),
-            &self,
-        ))
-    }
-
-    fn visit_borrowed_bytes<E>(self, v: &'de [u8]) -> Result<Self::Value, E>
-    where
-        E: serde::de::Error,
-    {
-        self.visit_bytes(v)
-    }
-
-    fn visit_byte_buf<E>(self, v: Vec<u8>) -> Result<Self::Value, E>
-    where
-        E: serde::de::Error,
-    {
-        self.visit_bytes(&v)
+        Ok(Ia5String(match der::asn1::Ia5String::from_der(v) {
+            Ok(val) => val,
+            Err(e) => return Err(E::custom(e)),
+        }))
     }
 
     fn visit_none<E>(self) -> Result<Self::Value, E>
     where
         E: serde::de::Error,
     {
-        Err(serde::de::Error::invalid_type(
-            serde::de::Unexpected::Option,
-            &self,
+        Ok(Ia5String(
+            der::asn1::Ia5String::new("").expect("Failed to create empty Ia5String"),
         ))
     }
 
