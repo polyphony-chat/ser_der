@@ -25,6 +25,29 @@ struct MyStruct {
 
 All newtypes implement `Deref`, `DerefMut`, `From<[Newtype]> for [Type]` and `From<[Type]> for [Newtype]` to the underlying `der` type.
 
+## Types covered
+
+- [x] IA5String
+- [ ] DateTime
+- [ ] Document
+- [ ] Length
+- [ ] Any
+- [ ] BitString
+- [ ] GeneralizedTime
+- [ ] Header
+- [ ] Int
+- [ ] Length
+- [ ] Null
+- [ ] ObjectIdentifier
+- [ ] OctetString
+- [ ] PrintableString
+- [ ] SequenceOf
+- [ ] SetOf
+- [ ] Tag
+- [ ] TeletexString
+- [ ] Uint
+- [ ] UtcTime
+
 ## Upstreaming to `der`
 
 This crate is a temporary solution until the `der` crate supports serde de-/serialization. The plan is to upstream the serde support to the [`der` crate](https://github.com/RustCrypto/formats/tree/master/der).
