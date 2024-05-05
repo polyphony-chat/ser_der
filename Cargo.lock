@@ -84,6 +84,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "ser_der"
+version = "0.0.0"
+dependencies = [
+ "der",
+ "serde",
+]
+
+[[package]]
 name = "serde"
 version = "1.0.200"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -101,14 +109,6 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn",
-]
-
-[[package]]
-name = "serder"
-version = "0.0.0"
-dependencies = [
- "der",
- "serde",
 ]
 
 [[package]]

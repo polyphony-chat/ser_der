@@ -1,4 +1,4 @@
-# serder
+# ser_der
 
 Newtypes for the der crate to allow for [serde](https://serde.rs) de-/serialization.
 
@@ -8,7 +8,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-serder = "0"
+ser_der = "0"
 der = { version = "0", features = ["alloc"] }
 serde = { version = "1", features = ["derive"] }
 ```
@@ -18,8 +18,8 @@ You can then use the newtypes offered by this crate to de-/serialize DER-encoded
 ```rust
 #[derive(serde::Serialize, serde::Deserialize)]
 struct MyStruct {
-    #[serde(with = "serder::asn1::ia5_string")]
-    bits: serder::asn1::IA5String,
+    #[serde(with = "ser_der::asn1::ia5_string")]
+    bits: ser_der::asn1::IA5String,
 }
 ```
 

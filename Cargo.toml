@@ -1,5 +1,5 @@
 [package]
-name = "serder"
+name = "ser_der"
 description = "Newtypes for the der crate to allow for serde de-/serialization"
 version = "0.0.0"
 edition = "2021"
