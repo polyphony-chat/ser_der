@@ -6,8 +6,17 @@ edition = "2021"
 authors = ["bitfl0wer"]
 license = "MPL-2.0"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[features]
+default = []
+alloc = ["der/alloc"]
+std = ["alloc"]
+arbitrary = ["der/arbitrary"]
+bytes = ["der/bytes"]
+oid = ["der/oid"]
+pem = ["der/pem"]
+real = ["der/real"]
+
 
 [dependencies]
-der = "0.7.9"
-serde = { version = "1.0.200", features = ["derive"] }
+der = "0.7"
+serde = { version = "1.0", features = ["derive"] }
