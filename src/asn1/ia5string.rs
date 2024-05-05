@@ -12,6 +12,15 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, PartialEq, Clone, Eq, PartialOrd, Ord)]
 pub struct Ia5String(der::asn1::Ia5String);
 
+impl Ia5String {
+    pub fn new<T>(input: &T) -> Result<Self, der::Error>
+    where
+        T: AsRef<[u8]> + ?Sized,
+    {
+        Ok(Ia5String(der::asn1::Ia5String::new(input)?))
+    }
+}
+
 impl Deref for Ia5String {
     type Target = der::asn1::Ia5String;
 
