@@ -8,8 +8,8 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-ser_der = "0"
-der = { version = "0", features = ["alloc"] }
+ser_der = { version = "0", features = ["alloc"] } # Features should match the ones of the der crate
+der = { version = "0", features = ["alloc"] } 
 serde = { version = "1", features = ["derive"] }
 ```
 
